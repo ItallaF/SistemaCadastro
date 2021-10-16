@@ -1,0 +1,79 @@
+# SistemaCadastro
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRUD usando Node.JS + MySQL</title>
+    <!-- USING BOOTSTRAP FOR STYLING USER INTERFACE -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        .customRow{
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+</style>
+</head>
+
+<body>
+    <div class="customRow">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-center">Sistema Cadastro de Produtos</h1>
+                    <hr>
+                    <form action="" method="POST">
+                        <div class="form-group">
+                            <label for="produt_descricao">DESCRIÇÃO</label>
+                            <input type="text" name="descricao" class="form-control" placeholder="Descrição" id="produt_descricao" required>
+                            <label for="quantidade">QUANTIDADE</label>
+                            <input type="text" name="quantidade" class="form-control" placeholder="Quantidade" id="quantidade" required>
+                            <label for="precoUnit">PPREÇO UNITÁRIO</label>
+                            <input type="text" name="precoUnit" class="form-control" placeholder="Preço" id="precoUnit" required>
+                            <label for="fornecedor">FORNECEDOR</label>
+                            <input type="text" name="fornecedor" class="form-control" placeholder="Fornecedor" id="fornecedor" required>
+                            <label for="data">DATA</label>
+                            <input type="date" name="data" class="form-control" placeholder="data" id="data" required>
+                            <label for="desconto">DESCONTO</label>
+                            <input type="text" name="desconto" class="form-control" placeholder="Desconto" id="desconto" required>
+                            <label for="icms">ICMS</label>
+                            <input type="text" name="icms" class="form-control" placeholder="Icms" id="icms" required>
+                            <br>
+                            <input type="submit" value="CADASTRAR" class="btn btn-primary">
+                        </div>
+                    </form>
+                    <hr>
+                    <h2 class="text-center">Todos os Produtos</h2>
+                    <!-- IF HAVE ANY USERS -->
+                    {% if produtos|length > 0 %}
+                        <!-- LOOPING ALL THE USUARIOS -->
+                        {% for produt in produtos %}
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ produt.descricao | e }}&nbsp;|&nbsp;<small><span>{{ produt.quantidade }}</span></small>
+                                    <small><span>{{ produt.preco }}</span></small>
+                                    <small><span>{{ produt.fornecedor }}</span></small>
+                                    <small><span>{{ produt.data }}</span></small>
+                                    <small><span>{{ produt.desconto }}</span></small>
+                                    <small><span>{{ produt.icms }}</span></small></h5>
+                                    <a href="/edit/{{ produt.cod | e }}" class="btn btn-light">&#9998; Editar</a>
+                                    <a href="/delete/{{ produt.cod | e }}" class="btn btn-danger">Remover</a>
+                                </div>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    {% else %}
+                        <h4>Produtos não encontrados !</h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+
+</html>
